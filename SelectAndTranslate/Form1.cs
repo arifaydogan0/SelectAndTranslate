@@ -5,6 +5,7 @@ using System.Web;
 using System.Threading.Tasks;
 using Gma.System.MouseKeyHook;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace SelectAndTranslate
 {
@@ -16,16 +17,27 @@ namespace SelectAndTranslate
             get => _sourceText;
             set
             {
+                IsActive = true;
                 if (_sourceText == value)
                     return;
                 _sourceText = value;
 
                 richTextBox1.Clear();
                 richTextBox1.AppendText(Translate(_sourceText, "auto", TargetLang).Replace("\\n", "\n").Replace("\\r", "\r").Replace("\\u003c", "\u003c").Replace("\\u003d", "\u003d").Replace("\\u003e", "\u003e"));
-
             }
         }
         public string TargetLang { get; set; } = "tr";
+        bool _isActive = false;
+        public bool IsActive
+        {
+            get => _isActive;
+            set
+            {
+                var screens = Screen.AllScreens;
+                this.Location = screens.Length == 1 ? new Point(screens[0].WorkingArea.Width - this.Width, screens[0].WorkingArea.Height - this.Height) : new Point(screens[1].WorkingArea.Width - this.Width, screens[1].WorkingArea.Height - this.Height);
+            }
+        }
+        public DateTime LastActivate { get; set; } = DateTime.Now;
 
 
         public Form1()
@@ -39,7 +51,8 @@ namespace SelectAndTranslate
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            //TODO: buraya pencerenin boyutunu ve konumunu ayarlayan kodları yaz.
+            IsActive = true;
+
             if (Test())
                 this.Text = "Bağlantı var";
             else
@@ -47,7 +60,7 @@ namespace SelectAndTranslate
         }
         private void timer_Tick(object sender, EventArgs e)
         {
-            //her cycle da seçili metin var mı diye baksın, varsa tüm metni çevirip textboxa yazsın
+
 
         }
         private void buttonClose_Click(object sender, EventArgs e)
@@ -58,7 +71,7 @@ namespace SelectAndTranslate
         {
             labelCopied.Visible = true;
             System.Windows.Clipboard.SetText(richTextBox1.Text);
-            await Task.Delay(111);
+            await Task.Delay(333);
             labelCopied.Visible = false;
         }
 
@@ -109,7 +122,7 @@ namespace SelectAndTranslate
                 string filteredResult = "";
                 for (int i = 0; i < contents.Count; i++)
                 {
-                    if (input.Contains(contents[i].Replace("\\n", "\n").Replace("\\r", "\r").Replace("\\u003c", "\u003c").Replace("\\u003d", "\u003d").Replace("\\u003e", "\u003e")) && !contents[i-1].Contains("en_tr"))
+                    if (input.Contains(contents[i].Replace("\\n", "\n").Replace("\\r", "\r").Replace("\\u003c", "\u003c").Replace("\\u003d", "\u003d").Replace("\\u003e", "\u003e")) && !contents[i - 1].Contains("en_tr") && contents[i].Length > 7)
                         filteredResult += contents[i - 1];
                 }
                 return filteredResult;
@@ -119,9 +132,6 @@ namespace SelectAndTranslate
                 return "error";
             }
         }
-
-
-
         // GUI gecikmelerini önlemek için işlevi zaman uyumsuz hale getiriyorum.
         private async void MouseDragFinished(object sender, System.Windows.Forms.MouseEventArgs e) => await GetSelectedText();
         //private async void MouseDoubleClicked(object sender, System.Windows.Forms.MouseEventArgs e) => await GetSelectedText();
@@ -140,13 +150,11 @@ namespace SelectAndTranslate
             await Task.Delay(50);
 
             if (System.Windows.Clipboard.ContainsText())
-            {
                 SourceText = System.Windows.Clipboard.GetText();
-            }
+
 
             System.Windows.Clipboard.SetDataObject(tmpClipboard);  // Restore the Clipboard.
         }
-
 
     }
 }
