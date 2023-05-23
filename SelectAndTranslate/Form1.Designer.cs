@@ -32,9 +32,9 @@
             this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.buttonClose = new System.Windows.Forms.Button();
+            this.buttonCopy = new System.Windows.Forms.Button();
+            this.labelCopied = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // webBrowser
@@ -51,13 +51,12 @@
             this.richTextBox1.BackColor = System.Drawing.Color.White;
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox1.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox1.Location = new System.Drawing.Point(0, 0);
+            this.richTextBox1.Font = new System.Drawing.Font("Lucida Sans Unicode", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox1.Location = new System.Drawing.Point(14, 24);
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(5);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(585, 245);
+            this.richTextBox1.Size = new System.Drawing.Size(571, 216);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -66,55 +65,58 @@
             this.timer.Interval = 555;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
-            // button1
+            // buttonClose
             // 
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button1.Location = new System.Drawing.Point(567, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(18, 20);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "x";
-            this.button1.UseCompatibleTextRendering = true;
-            this.button1.UseVisualStyleBackColor = true;
+            this.buttonClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.buttonClose.Location = new System.Drawing.Point(570, 1);
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Size = new System.Drawing.Size(18, 20);
+            this.buttonClose.TabIndex = 2;
+            this.buttonClose.Text = "x";
+            this.buttonClose.UseCompatibleTextRendering = true;
+            this.buttonClose.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
-            // button2
+            // buttonCopy
             // 
-            this.button2.BackColor = System.Drawing.Color.Transparent;
-            this.button2.BackgroundImage = global::SelectAndTranslate.Resource1.copy;
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button2.Location = new System.Drawing.Point(567, 225);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(18, 20);
-            this.button2.TabIndex = 2;
-            this.button2.UseCompatibleTextRendering = true;
-            this.button2.UseVisualStyleBackColor = false;
+            this.buttonCopy.BackColor = System.Drawing.Color.Transparent;
+            this.buttonCopy.BackgroundImage = global::SelectAndTranslate.Resource1.copy;
+            this.buttonCopy.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonCopy.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonCopy.FlatAppearance.BorderSize = 0;
+            this.buttonCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonCopy.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.buttonCopy.Location = new System.Drawing.Point(556, 209);
+            this.buttonCopy.Name = "buttonCopy";
+            this.buttonCopy.Size = new System.Drawing.Size(29, 31);
+            this.buttonCopy.TabIndex = 2;
+            this.buttonCopy.UseCompatibleTextRendering = true;
+            this.buttonCopy.UseVisualStyleBackColor = false;
+            this.buttonCopy.Click += new System.EventHandler(this.buttonCopy_Click);
             // 
-            // label1
+            // labelCopied
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Location = new System.Drawing.Point(524, 227);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Copied";
-            this.label1.Visible = false;
+            this.labelCopied.AutoSize = true;
+            this.labelCopied.BackColor = System.Drawing.Color.Transparent;
+            this.labelCopied.Font = new System.Drawing.Font("Cascadia Code", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.labelCopied.Location = new System.Drawing.Point(496, 216);
+            this.labelCopied.Name = "labelCopied";
+            this.labelCopied.Size = new System.Drawing.Size(56, 18);
+            this.labelCopied.TabIndex = 3;
+            this.labelCopied.Text = "Copied";
+            this.labelCopied.Visible = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(585, 245);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(588, 258);
+            this.Controls.Add(this.labelCopied);
+            this.Controls.Add(this.buttonCopy);
+            this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.webBrowser);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -132,9 +134,9 @@
         private System.Windows.Forms.WebBrowser webBrowser;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Timer timer;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button buttonClose;
+        private System.Windows.Forms.Button buttonCopy;
+        private System.Windows.Forms.Label labelCopied;
     }
 }
 

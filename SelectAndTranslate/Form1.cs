@@ -21,7 +21,7 @@ namespace SelectAndTranslate
                 _sourceText = value;
 
                 richTextBox1.Clear();
-                richTextBox1.AppendText(Translate(_sourceText, "auto", TargetLang).Replace("\\n","\n").Replace("\\r","\r"));
+                richTextBox1.AppendText(Translate(_sourceText, "auto", TargetLang).Replace("\\n", "\n").Replace("\\r", "\r").Replace("\\u003c", "\u003c").Replace("\\u003d", "\u003d").Replace("\\u003e", "\u003e"));
 
             }
         }
@@ -49,6 +49,17 @@ namespace SelectAndTranslate
         {
             //her cycle da seçili metin var mı diye baksın, varsa tüm metni çevirip textboxa yazsın
 
+        }
+        private void buttonClose_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+        private async void buttonCopy_Click(object sender, EventArgs e)
+        {
+            labelCopied.Visible = true;
+            System.Windows.Clipboard.SetText(richTextBox1.Text);
+            await Task.Delay(111);
+            labelCopied.Visible = false;
         }
 
 
@@ -79,7 +90,7 @@ namespace SelectAndTranslate
         /// <returns></returns>
         public static String Translate(String input, string from, string to)
         {
-            var url = $"https://translate.googleapis.com/translate_a/single?client=gtx&sl={from}&tl={to}&dt=t&q={HttpUtility.UrlEncode(input)}";
+            var url = $"https://translate.googleapis.com/translate_a/single?client=gtx&sl={from}&tl={to}&dt=t&q={HttpUtility.UrlEncode(input.Replace("\"", "\'aa"))}";
             var result = new WebClient { Encoding = System.Text.Encoding.UTF8 }.DownloadString(url);
             try
             {
@@ -93,13 +104,13 @@ namespace SelectAndTranslate
                 for (int i = 0; i < quoteIndex.Count - 1; i = i + 2)
                 {
                     string content = result.Substring(quoteIndex[i] + 1, quoteIndex[i + 1] - quoteIndex[i] - 1);
-                    contents.Add(content);
+                    contents.Add(content.Replace("\'aa", "\""));
                 }
                 string filteredResult = "";
                 for (int i = 0; i < contents.Count; i++)
                 {
-                    if (input.Contains(contents[i].Replace("\\n","").Replace("\\r","")) && contents[i].Length >= 7)
-                        filteredResult += contents[i-1];
+                    if (input.Contains(contents[i].Replace("\\n", "\n").Replace("\\r", "\r").Replace("\\u003c", "\u003c").Replace("\\u003d", "\u003d").Replace("\\u003e", "\u003e")) && !contents[i-1].Contains("en_tr"))
+                        filteredResult += contents[i - 1];
                 }
                 return filteredResult;
             }
@@ -135,5 +146,7 @@ namespace SelectAndTranslate
 
             System.Windows.Clipboard.SetDataObject(tmpClipboard);  // Restore the Clipboard.
         }
+
+
     }
 }
