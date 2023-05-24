@@ -151,7 +151,7 @@ namespace SelectAndTranslate
                     if (input.Contains(contents[i].Replace("\\n", "\n").Replace("\\r", "\r").Replace("\\u003c", "\u003c").Replace("\\u003d", "\u003d").Replace("\\u003e", "\u003e")) && !contents[i - 1].Contains("en_tr") && contents[i].Length > 7)
                         filteredResult += contents[i - 1];
                 }
-                lblTranslate = $"({contents[contents.Count - 1]} -> \"{to})\"";
+                lblTranslate = $"({contents[contents.Count - 1].ToUpper()} -> {to.ToUpper()})";
                 return filteredResult;
             }
             catch

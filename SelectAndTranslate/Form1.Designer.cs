@@ -59,13 +59,12 @@
             this.richTextBox1.ContextMenuStrip = this.contextMenuStrip1;
             this.richTextBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.richTextBox1.EnableAutoDragDrop = true;
-            this.richTextBox1.Enabled = false;
             this.richTextBox1.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox1.Location = new System.Drawing.Point(12, 14);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 20);
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(5);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(573, 204);
+            this.richTextBox1.Size = new System.Drawing.Size(573, 202);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -97,7 +96,7 @@
             this.labelCopied.BackColor = System.Drawing.Color.Transparent;
             this.labelCopied.Font = new System.Drawing.Font("Cascadia Code", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.labelCopied.ForeColor = System.Drawing.Color.Indigo;
-            this.labelCopied.Location = new System.Drawing.Point(494, 212);
+            this.labelCopied.Location = new System.Drawing.Point(494, 215);
             this.labelCopied.Name = "labelCopied";
             this.labelCopied.Size = new System.Drawing.Size(56, 18);
             this.labelCopied.TabIndex = 3;
@@ -113,7 +112,7 @@
             this.buttonCopy.FlatAppearance.BorderSize = 0;
             this.buttonCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonCopy.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.buttonCopy.Location = new System.Drawing.Point(557, 202);
+            this.buttonCopy.Location = new System.Drawing.Point(557, 205);
             this.buttonCopy.Name = "buttonCopy";
             this.buttonCopy.Size = new System.Drawing.Size(29, 33);
             this.buttonCopy.TabIndex = 2;
@@ -139,7 +138,7 @@
             // 
             this.notifyIcon1.ContextMenuStrip = this.contextMenuStrip1;
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
-            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Text = "SelectAndTranslate";
             this.notifyIcon1.Visible = true;
             // 
             // labelTranslate
@@ -148,12 +147,11 @@
             this.labelTranslate.BackColor = System.Drawing.Color.Transparent;
             this.labelTranslate.Font = new System.Drawing.Font("Cascadia Code", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.labelTranslate.ForeColor = System.Drawing.Color.Indigo;
-            this.labelTranslate.Location = new System.Drawing.Point(0, 2);
+            this.labelTranslate.Location = new System.Drawing.Point(5, 0);
             this.labelTranslate.Name = "labelTranslate";
             this.labelTranslate.Size = new System.Drawing.Size(88, 18);
             this.labelTranslate.TabIndex = 5;
             this.labelTranslate.Text = "(tr -> en)";
-            this.labelTranslate.Visible = false;
             // 
             // Form1
             // 
@@ -170,6 +168,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
+            this.Opacity = 0.85D;
             this.ShowInTaskbar = false;
             this.Text = "\"";
             this.TopMost = true;
