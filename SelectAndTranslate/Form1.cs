@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using Gma.System.MouseKeyHook;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.InteropServices;
+using System.Linq;
+using System.Windows.Input;
 
 namespace SelectAndTranslate
 {
@@ -24,6 +27,7 @@ namespace SelectAndTranslate
 
                 richTextBox1.Clear();
                 richTextBox1.AppendText(Translate(_sourceText, "auto", TargetLang).Replace("\\n", "\n").Replace("\\r", "\r").Replace("\\u003c", "\u003c").Replace("\\u003d", "\u003d").Replace("\\u003e", "\u003e"));
+                labelTranslate.Text = lblTranslate;
             }
         }
         public string TargetLang { get; set; } = "tr";
@@ -33,11 +37,27 @@ namespace SelectAndTranslate
             get => _isActive;
             set
             {
-                var screens = Screen.AllScreens;
-                this.Location = screens.Length == 1 ? new Point(screens[0].WorkingArea.Width - this.Width, screens[0].WorkingArea.Height - this.Height) : new Point(screens[1].WorkingArea.Width - this.Width, screens[1].WorkingArea.Height - this.Height);
+                _isActive = value;
+                if (value)
+                {
+                    var screens = Screen.AllScreens.OrderBy(s => s.Bounds.X).ToList();
+                    var cursorPos = GetCursorPosition();
+                    if (screens.Count == 1 || cursorPos.X > screens[0].Bounds.X && cursorPos.X < screens[0].Bounds.X + screens[0].Bounds.Width)
+                        this.Location = new Point(screens[0].Bounds.X + screens[0].Bounds.Width - this.Width - 10, screens[0].Bounds.Height - this.Height - 10);
+                    else
+                        this.Location = new Point(screens[1].Bounds.X + screens[1].Bounds.Width - this.Width - 10, screens[1].Bounds.Height - this.Height - 10);
+                    LastActivate = DateTime.Now;
+                    this.Show();
+                }
+                else
+                {
+                    this.Hide();
+
+                }
             }
         }
         public DateTime LastActivate { get; set; } = DateTime.Now;
+        public static string lblTranslate = "";
 
 
         public Form1()
@@ -60,12 +80,14 @@ namespace SelectAndTranslate
         }
         private void timer_Tick(object sender, EventArgs e)
         {
-
-
+            if ((DateTime.Now - LastActivate).TotalSeconds > richTextBox1.Text.Length / 6 + 7)
+            {
+                this.Hide();
+            }
         }
         private void buttonClose_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.Hide();
         }
         private async void buttonCopy_Click(object sender, EventArgs e)
         {
@@ -73,6 +95,10 @@ namespace SelectAndTranslate
             System.Windows.Clipboard.SetText(richTextBox1.Text);
             await Task.Delay(333);
             labelCopied.Visible = false;
+        }
+        private void kapatToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
 
 
@@ -125,6 +151,7 @@ namespace SelectAndTranslate
                     if (input.Contains(contents[i].Replace("\\n", "\n").Replace("\\r", "\r").Replace("\\u003c", "\u003c").Replace("\\u003d", "\u003d").Replace("\\u003e", "\u003e")) && !contents[i - 1].Contains("en_tr") && contents[i].Length > 7)
                         filteredResult += contents[i - 1];
                 }
+                lblTranslate = $"({contents[contents.Count - 1]} -> \"{to})\"";
                 return filteredResult;
             }
             catch
@@ -154,6 +181,29 @@ namespace SelectAndTranslate
 
 
             System.Windows.Clipboard.SetDataObject(tmpClipboard);  // Restore the Clipboard.
+        }
+
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct POINT
+        {
+            public int X;
+            public int Y;
+            public static implicit operator Point(POINT point)
+            {
+                //return new Point(point.X - 175, point.Y - 100);               
+                return new Point(point.X, point.Y);
+                //Normal şartlarda bir üst satırdaki gibi olması gerekiyor.
+                //Verdiğim bu ( - ) değerlerin açıklması aşağıdadır.                
+            }
+        }
+        [DllImport("user32.dll")]
+        public static extern bool GetCursorPos(out POINT lpPoint);
+        public static Point GetCursorPosition()
+        {
+            POINT lpPoint;
+            GetCursorPos(out lpPoint);
+            return lpPoint;
         }
 
     }
