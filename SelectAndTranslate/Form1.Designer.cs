@@ -149,9 +149,9 @@
             this.labelTranslate.ForeColor = System.Drawing.Color.Indigo;
             this.labelTranslate.Location = new System.Drawing.Point(5, 0);
             this.labelTranslate.Name = "labelTranslate";
-            this.labelTranslate.Size = new System.Drawing.Size(88, 18);
+            this.labelTranslate.Size = new System.Drawing.Size(104, 18);
             this.labelTranslate.TabIndex = 5;
-            this.labelTranslate.Text = "(tr -> en)";
+            this.labelTranslate.Text = "(Auto -> Tr)";
             // 
             // Form1
             // 
