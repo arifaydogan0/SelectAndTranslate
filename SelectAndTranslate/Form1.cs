@@ -154,9 +154,9 @@ namespace SelectAndTranslate
                 lblTranslate = $"({contents[contents.Count - 1].ToUpper()} -> {to.ToUpper()})";
                 return filteredResult;
             }
-            catch
+            catch(Exception ex)
             {
-                return "error";
+                return $"error\n{ex.Message}";
             }
         }
         // GUI gecikmelerini önlemek için işlevi zaman uyumsuz hale getiriyorum.
@@ -169,18 +169,27 @@ namespace SelectAndTranslate
         /// <returns></returns>
         async Task GetSelectedText()
         {
-            System.Windows.IDataObject tmpClipboard = System.Windows.Clipboard.GetDataObject();  // Daha sonra geri yüklemek için panonun mevcut içeriğini kaydedin.
-            System.Windows.Clipboard.Clear();
-            await Task.Delay(50);   // Küçük bir gecikmenin daha güvenli olacağını düşünüyorum.Kaldırabilirsiniz ama dikkatli olun.
+            var tmpClipboard = System.Windows.Clipboard.GetText();  // Daha sonra geri yüklemek için panonun mevcut içeriğini kaydedin.
+            try
+            {
+                System.Windows.Clipboard.Clear();
+                await Task.Delay(50);   // Küçük bir gecikmenin daha güvenli olacağını düşünüyorum.Kaldırabilirsiniz ama dikkatli olun.
 
-            System.Windows.Forms.SendKeys.SendWait("^c");   // Send Ctrl+C, which is "copy"
-            await Task.Delay(50);
+                System.Windows.Forms.SendKeys.SendWait("^c");   // Send Ctrl+C, which is "copy"
+                await Task.Delay(50);
 
-            if (System.Windows.Clipboard.ContainsText())
-                SourceText = System.Windows.Clipboard.GetText();
+                if (System.Windows.Clipboard.ContainsText())
+                    SourceText = System.Windows.Clipboard.GetText();
+            }
+            catch
+            {
 
+            }
+            finally
+            {
 
-            System.Windows.Clipboard.SetDataObject(tmpClipboard);  // Restore the Clipboard.
+                System.Windows.Clipboard.SetText(tmpClipboard);  // Restore the Clipboard.
+            }
         }
 
 
