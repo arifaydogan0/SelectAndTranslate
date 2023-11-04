@@ -66,7 +66,7 @@ namespace SelectAndTranslate
 
             globalMouseHook = Hook.GlobalEvents(); // Not: uygulama kancası için bunun yerine Hook.AppEvents() öğesini kullanın.
 
-            globalMouseHook.MouseDragFinished += MouseDragFinished;   // DragFinished olayını bir işlevle bağlayın. Çift tıklama ile aynı, bu yüzden buraya yazmadım.
+            globalMouseHook.MouseDragFinished += MouseDragFinished;   // DragFinished olayını bir metotla bağlayın. Çift tıklama ile aynı, bu yüzden buraya yazmadım.
             //globalMouseHook.MouseDoubleClick += MouseDoubleClicked;   // MouseDoubleClick olayını MouseDoubleClicked adlı bir işlevle bağlayın. 
         }
         private void Form1_Load(object sender, EventArgs e)
