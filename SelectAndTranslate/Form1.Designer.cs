@@ -32,23 +32,25 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.kapatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.buttonClose = new System.Windows.Forms.Button();
             this.labelCopied = new System.Windows.Forms.Label();
             this.buttonCopy = new System.Windows.Forms.Button();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.kapatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.labelTranslate = new System.Windows.Forms.Label();
+            this.duraklatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // webBrowser
             // 
-            this.webBrowser.Location = new System.Drawing.Point(12, 12);
-            this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser.Location = new System.Drawing.Point(16, 15);
+            this.webBrowser.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.webBrowser.MinimumSize = new System.Drawing.Size(27, 25);
             this.webBrowser.Name = "webBrowser";
-            this.webBrowser.Size = new System.Drawing.Size(135, 75);
+            this.webBrowser.Size = new System.Drawing.Size(180, 92);
             this.webBrowser.TabIndex = 0;
             this.webBrowser.Visible = false;
             // 
@@ -60,13 +62,29 @@
             this.richTextBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.richTextBox1.EnableAutoDragDrop = true;
             this.richTextBox1.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox1.Location = new System.Drawing.Point(12, 20);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(5);
+            this.richTextBox1.Location = new System.Drawing.Point(16, 25);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(573, 202);
+            this.richTextBox1.Size = new System.Drawing.Size(764, 249);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.kapatToolStripMenuItem,
+            this.duraklatToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(211, 80);
+            // 
+            // kapatToolStripMenuItem
+            // 
+            this.kapatToolStripMenuItem.Name = "kapatToolStripMenuItem";
+            this.kapatToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.kapatToolStripMenuItem.Text = "Kapat";
+            this.kapatToolStripMenuItem.Click += new System.EventHandler(this.kapatToolStripMenuItem_Click);
             // 
             // timer
             // 
@@ -81,9 +99,10 @@
             this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.buttonClose.ForeColor = System.Drawing.Color.White;
-            this.buttonClose.Location = new System.Drawing.Point(570, 0);
+            this.buttonClose.Location = new System.Drawing.Point(760, 0);
+            this.buttonClose.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(18, 20);
+            this.buttonClose.Size = new System.Drawing.Size(24, 25);
             this.buttonClose.TabIndex = 2;
             this.buttonClose.Text = "x";
             this.buttonClose.UseCompatibleTextRendering = true;
@@ -96,9 +115,10 @@
             this.labelCopied.BackColor = System.Drawing.Color.Transparent;
             this.labelCopied.Font = new System.Drawing.Font("Cascadia Code", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.labelCopied.ForeColor = System.Drawing.Color.Indigo;
-            this.labelCopied.Location = new System.Drawing.Point(494, 215);
+            this.labelCopied.Location = new System.Drawing.Point(659, 265);
+            this.labelCopied.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelCopied.Name = "labelCopied";
-            this.labelCopied.Size = new System.Drawing.Size(56, 18);
+            this.labelCopied.Size = new System.Drawing.Size(70, 22);
             this.labelCopied.TabIndex = 3;
             this.labelCopied.Text = "Copied";
             this.labelCopied.Visible = false;
@@ -112,27 +132,14 @@
             this.buttonCopy.FlatAppearance.BorderSize = 0;
             this.buttonCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonCopy.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.buttonCopy.Location = new System.Drawing.Point(557, 205);
+            this.buttonCopy.Location = new System.Drawing.Point(743, 252);
+            this.buttonCopy.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonCopy.Name = "buttonCopy";
-            this.buttonCopy.Size = new System.Drawing.Size(29, 33);
+            this.buttonCopy.Size = new System.Drawing.Size(39, 41);
             this.buttonCopy.TabIndex = 2;
             this.buttonCopy.UseCompatibleTextRendering = true;
             this.buttonCopy.UseVisualStyleBackColor = false;
             this.buttonCopy.Click += new System.EventHandler(this.buttonCopy_Click);
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.kapatToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(105, 26);
-            // 
-            // kapatToolStripMenuItem
-            // 
-            this.kapatToolStripMenuItem.Name = "kapatToolStripMenuItem";
-            this.kapatToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
-            this.kapatToolStripMenuItem.Text = "Kapat";
-            this.kapatToolStripMenuItem.Click += new System.EventHandler(this.kapatToolStripMenuItem_Click);
             // 
             // notifyIcon1
             // 
@@ -147,18 +154,25 @@
             this.labelTranslate.BackColor = System.Drawing.Color.Transparent;
             this.labelTranslate.Font = new System.Drawing.Font("Cascadia Code", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.labelTranslate.ForeColor = System.Drawing.Color.Indigo;
-            this.labelTranslate.Location = new System.Drawing.Point(5, 0);
+            this.labelTranslate.Location = new System.Drawing.Point(7, 0);
+            this.labelTranslate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTranslate.Name = "labelTranslate";
-            this.labelTranslate.Size = new System.Drawing.Size(104, 18);
+            this.labelTranslate.Size = new System.Drawing.Size(130, 22);
             this.labelTranslate.TabIndex = 5;
             this.labelTranslate.Text = "(Auto -> Tr)";
             // 
+            // duraklatToolStripMenuItem
+            // 
+            this.duraklatToolStripMenuItem.Name = "duraklatToolStripMenuItem";
+            this.duraklatToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.duraklatToolStripMenuItem.Text = "Duraklat";
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(588, 236);
+            this.ClientSize = new System.Drawing.Size(784, 290);
             this.Controls.Add(this.labelTranslate);
             this.Controls.Add(this.labelCopied);
             this.Controls.Add(this.buttonCopy);
@@ -167,6 +181,7 @@
             this.Controls.Add(this.webBrowser);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.Opacity = 0.85D;
             this.ShowInTaskbar = false;
@@ -191,6 +206,7 @@
         private System.Windows.Forms.ToolStripMenuItem kapatToolStripMenuItem;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.Label labelTranslate;
+        private System.Windows.Forms.ToolStripMenuItem duraklatToolStripMenuItem;
     }
 }
 
